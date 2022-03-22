@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const varifyUser = async function(req, res, next) {
+const verifyUser = async function(req, res, next) {
     try {
         const authHeader = req.headers['authorization'];
         if (!authHeader) {
@@ -18,4 +18,4 @@ const varifyUser = async function(req, res, next) {
         res.status(500).send({ status: false, message: error.message })
     }
 }
-module.exports = { varifyUser }
+module.exports = { verifyUser }

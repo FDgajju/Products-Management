@@ -1,22 +1,24 @@
-let express = require('express');
-let bodyParser = require('body-parser');
-let multer = require('multer');
-let mongoose = require('mongoose');
+const express = require("express");
+const bodyParser = require("body-parser");
+const multer = require("multer");
 
-let route = require('./routes/route')
+const orderRoute = require("./routes/orderRoute");
+const userRoute = require("./routes/userRoute");
+const productRoute = require("./routes/productRoute")
+const cartRoute = require("./routes/cartRoute")
 
-let app = express ()
+const app = express();
+
+console.log(new Date());
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(multer().any())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multer().any());
 
-mongoose.connect("mongodb+srv://users-open-to-all:hiPassword123@cluster0.uh35t.mongodb.net/Group-15DataBase?retryWrites=true&w=majority")
-.then(() => console.log(`mongodb running at ${new Date()}...`))
-.catch(err => console.log(err))
+//Routes
+app.use("/users", userRoute);
+app.use("/users/order", orderRoute);
+app.use("/products", productRoute);
+app.use("/users/cart", cartRoute);
 
-app.use('/', route);
-
-app.listen(process.env.PORT || 3000, function() {
-    console.log('Express is running on PORT ' + (process.env.PORT || 3000))
-})
+module.exports = app;

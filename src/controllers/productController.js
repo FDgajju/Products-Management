@@ -152,7 +152,7 @@ const getProduct = async function (req, res) {
 
 }
 
-//get product Delails by id localhost:3000/products/:productId
+//get product Details by id localhost:3000/products/:productId
 const getProductById = async function (req, res) {
     try {
         let id = req.params.productId
@@ -200,16 +200,16 @@ const updateProduct = async function (req, res) {
 
         const { title, description, price, isFreeShipping, currencyId, currencyFormat, style, availableSizes, installments, productImage } = requestBody
         
-        const istitleAlreadyUsed = await productModel.findOne({ _id: productId });
+        const isTitleAlreadyUsed = await productModel.findOne({ _id: productId });
         
         if (Object.prototype.hasOwnProperty.call(requestBody, "title")) {
             if (!validate.isValid(title)) {
                 res.status(400).send({ status: false, message: "please enter valid title" })
                 return
             }
-            const istitleAlreadyUsed = await productModel.findOne({ title });
+            const isTitleAlreadyUsed = await productModel.findOne({ title });
             
-            if (istitleAlreadyUsed) {
+            if (isTitleAlreadyUsed) {
                 res.status(400).send({ status: false, message: `${title} these title is already registered` })
                 return
             }
@@ -271,11 +271,11 @@ const updateProduct = async function (req, res) {
                 return
             }
 
-            if(istitleAlreadyUsed.availableSizes.indexOf(availableSizes) !== -1){
+            if(isTitleAlreadyUsed.availableSizes.indexOf(availableSizes) !== -1){
                 res.status(400).send({status: false, message: "this size already avalible"})
                 return
             }
-            console.log(istitleAlreadyUsed.availableSizes.indexOf(availableSizes))
+            console.log(isTitleAlreadyUsed.availableSizes.indexOf(availableSizes))
         }
     }
     
@@ -302,7 +302,7 @@ const updateProduct = async function (req, res) {
     // console.log(uploadedFileURL)
 
         if (!validate.isValidRequestBody(requestBody)) {
-            return res.status(400).send({ status: false, message: 'No paramateres passed. product unmodified' })
+            return res.status(400).send({ status: false, message: 'No parameters passed. product unmodified' })
         }
 
         const productValue = { 
@@ -318,8 +318,8 @@ const updateProduct = async function (req, res) {
         }
 
         await productModel.findOneAndUpdate({_id: productId}, {$push: {availableSizes: availableSizes}})
-        const upatedProduct = await productModel.findOneAndUpdate({ _id: productId }, productValue, { new: true })
-        res.status(200).send({ status: true, message: 'User updated successfully', data: upatedProduct });
+        const updatedProduct = await productModel.findOneAndUpdate({ _id: productId }, productValue, { new: true })
+        res.status(200).send({ status: true, message: 'User updated successfully', data: updatedProduct });
 
 
     } catch (err) {
@@ -328,7 +328,7 @@ const updateProduct = async function (req, res) {
 }
 
 //delete product by Id
-const deleteproductByID = async (req, res) => {
+const deleteProductByID = async (req, res) => {
     try {
 
         const params = req.params.productId;
@@ -337,23 +337,23 @@ const deleteproductByID = async (req, res) => {
             return res.status(400).send({ status: false, message: "Inavlid productID." })
         }
 
-        const findproduct = await productModel.findById({ _id: params })
+        const findProduct = await productModel.findById({ _id: params })
 
-        if (!findproduct) {
+        if (!findProduct) {
 
             return res.status(404).send({ status: false, message: `No product found ` })
 
         }
 
-        else if (findproduct.isDeleted == true) {
+        else if (findProduct.isDeleted == true) {
             return res.status(400).send({ status: false, message: `product has been already deleted.` })
         } else {
-            const deleteData = await productModel.findOneAndUpdate({ _id: { $in: findproduct } }, { $set: { isDeleted: true, deletedAt: new Date() } }, { new: true });
-            return res.status(200).send({ status: true, message: "product deleted successfullly."})
+            const deleteData = await productModel.findOneAndUpdate({ _id: { $in: findProduct } }, { $set: { isDeleted: true, deletedAt: new Date() } }, { new: true });
+            return res.status(200).send({ status: true, message: "product deleted successfully."})
         }
     } catch (err) {
         return res.status(500).send({ status: false, message: "Something went wrong", Error: err.message })
     }
 }
 
-module.exports = { releaseProduct, getProduct, getProductById, updateProduct, deleteproductByID }
+module.exports = { releaseProduct, getProduct, getProductById, updateProduct, deleteProductByID }

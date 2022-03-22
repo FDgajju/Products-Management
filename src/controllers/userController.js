@@ -3,7 +3,7 @@ let validate = require("./validator");
 let bcryptjs = require("bcryptjs");
 let jwt = require("jsonwebtoken");
 let awsCon = require("./awsController");
-const { varifyUser } = require("../middleware/verify");
+// const { varifyUser } = require("../middleware/verify");
 
 //!register user - localhost:3000/register ----------------->
 let registerUser = async function (req, res) {
@@ -226,7 +226,7 @@ const getUser = async function (req, res) {
 };
 
 //!update user details  localhost:3000/user/:userId/profile----------->
-const updateUserDetailes = async (req, res) => {
+const updateUserDetails = async (req, res) => {
     try {
         let userId = req.params.userId;
         const requestBody = req.body;
@@ -427,7 +427,7 @@ const login = async function (req, res) {
             });
             return res.status(200).send({
                 status: true,
-                message: `User login successfull 😁🤟🏻`,
+                message: `you are successfully ${user.fname} ${user.lname} 😁🤟🏻`,
                 data: { userId: user._id, token },
             });
         } else {
@@ -438,4 +438,4 @@ const login = async function (req, res) {
     }
 };
 
-module.exports = { registerUser, getUser, updateUserDetailes, login };
+module.exports = { registerUser, getUser, updateUserDetails, login };

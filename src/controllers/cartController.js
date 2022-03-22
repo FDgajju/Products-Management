@@ -5,7 +5,7 @@ const cartModel = require('../models/cartModel')
 
 
 //create cart localhost:3000/users/:userId/cart
-const getCartDetails = async function (req, res) {
+const addCart = async function (req, res) {
 
     try {
 
@@ -304,4 +304,4 @@ const deleteCart = async function (req, res) {
     };
 };
 
-module.exports = { getCartDetails, updateCart, getCart, deleteCart }
+module.exports = { addCart, updateCart, getCart, deleteCart }

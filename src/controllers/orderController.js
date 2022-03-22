@@ -8,15 +8,15 @@ const createOrder = async function (req, res) {
     try {
             let userId = req.params.userId
             let cartId = req.body.cartId
-            const varifyUser = req.userId
-            let reqbody=req.body
+            const verifyUser = req.userId
+            let reqBody=req.body
 
         if (!validate.isValidObjectId(userId)) {
             res.status(400).send({ status: false, message: "please enter valid userId details" })
             return
         }
 
-        if (!(varifyUser === userId)) {
+        if (!(verifyUser === userId)) {
             res.status(400).send({ status: false, message: "user Authorization failed" })
             return
         }
@@ -59,8 +59,8 @@ const createOrder = async function (req, res) {
             totalPrice:cartPrice ,
             totalItems:cartTotalItems ,
             totalQuantity:cartTotalQuantity ,
-            cancellable:reqbody.cancellable,
-            status:reqbody.status
+            cancellable:reqBody.cancellable,
+            status:reqBody.status
         }
         const orderCreated=await orderModel.create(orderDetails)
         res.status(201).send({ status: false, message:"order created successfully" , data: orderCreated })
@@ -74,7 +74,7 @@ const updateOrder = async function(req,res){
     try{ 
         let userId = req.params.userId
         let orderId = req.body.orderId
-        const varifyUser = req.userId
+        const verifyUser = req.userId
 
        // let cancelOrd=req.body.cancelOrder
         if (!validate.isValidObjectId(userId)) {
@@ -82,7 +82,7 @@ const updateOrder = async function(req,res){
             return
         }
 
-        if (!(varifyUser === userId)) {
+        if (!(verifyUser === userId)) {
             res.status(400).send({ status: false, message: "user Authorization failed" })
             return
         }
