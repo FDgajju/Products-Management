@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 const {
@@ -6,15 +6,15 @@ const {
   getUser,
   updateUserDetails,
   login,
-} = require("../controllers/userController");
+} = require('../controllers/userController');
 
-const { verifyUser } = require("../middleware/verify");
+const { verifyUser } = require('../middleware/verify');
 
-router.post("/register", registerUser);
-router.post("/login", login);
+router.post('/register', registerUser);
+router.post('/login', login);
 
 router
-  .route("/:userId/profile")
+  .route('/:userId/profile')
   .get(verifyUser, getUser)
   .put(verifyUser, updateUserDetails);
 

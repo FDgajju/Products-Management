@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const app = require("./index");
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const app = require('./index');
 
 dotenv.config({ path: `${__dirname}/../config.env` });
 
 const DB =
-  process.env.DATABASE || "mongodb://localhost:27017/DBProductManagement";
+  process.env.DATABASE || 'mongodb://localhost:27017/DBProductManagement';
 mongoose
   .connect(DB)
   .then(() => console.log(`mongodb running...`))

@@ -1,12 +1,12 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const userController = require("../controllers/userController");
-const productController = require("../controllers/productController");
-const cartController = require("../controllers/cartController");
-const { createOrder , updateOrder } = require("../controllers/orderController");
+const userController = require('../controllers/userController');
+const productController = require('../controllers/productController');
+const cartController = require('../controllers/cartController');
+const { createOrder, updateOrder } = require('../controllers/orderController');
 //middleWare
-const { verifyUser } = require("../middleware/verify");
+const { verifyUser } = require('../middleware/verify');
 
 // router.post('/write-file-aws', awsController.createProfilePicture)
 //user
@@ -30,7 +30,7 @@ const { verifyUser } = require("../middleware/verify");
 
 //order Routes------------->
 router
-  .route("/:userId/orders")
+  .route('/:userId/orders')
   .post(verifyUser, createOrder)
   .put(verifyUser, updateOrder);
 

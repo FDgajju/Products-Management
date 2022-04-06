@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const multer = require("multer");
 
 const orderRoute = require("./routes/orderRoute");
@@ -11,8 +10,7 @@ const app = express();
 
 console.log(new Date());
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(multer().any());
 
 //Routes
