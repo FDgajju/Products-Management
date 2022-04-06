@@ -18,7 +18,4 @@ router
   .get(verifyUser, getUser)
   .put(verifyUser, updateUserDetails);
 
-// router.get("/:userId/profile", verifyUser, userController.getUser);
-// router.put("/:userId/profile", verifyUser, userController.updateUserDetailes);
-
 module.exports = router;

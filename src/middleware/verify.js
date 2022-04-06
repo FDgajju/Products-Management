@@ -24,4 +24,5 @@ const verifyUser = async function (req, res, next) {
     res.status(500).send({ status: false, message: error.message });
   }
 };
+
 module.exports = { verifyUser };
